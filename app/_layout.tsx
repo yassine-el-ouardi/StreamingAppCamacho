@@ -29,7 +29,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* Replace (tabs) with index.tsx or your main screen */}
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        {/* Keep the +not-found route for handling unknown paths */}
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>
