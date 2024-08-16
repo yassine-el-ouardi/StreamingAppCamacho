@@ -84,28 +84,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    flexDirection: 'row',
+    flexDirection: 'row', // Ensures sidebar and content are side by side
   },
   sidebar: {
-    width: 60,
+    width: '8.98%',
     height: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     paddingVertical: 20,
-    position: 'absolute',
-    top: 0,
-    left: 0,
+    backgroundColor: '#000000', // Add a solid background color to the sidebar
+    // No need for position absolute since it's now part of the flexbox layout
   },
   scrollContainer: {
     flexGrow: 1,
     paddingBottom: 20,
-    flexDirection: 'column',
+    paddingLeft: 0, // Remove left padding since sidebar is no longer overlapping
   },
   headerSection: {
     width: '100%',
     height: '58.33%', // Same as before for the header section
     position: 'relative',
-    //minHeight: 300, // Ensure a minimum height to prevent shrinking
   },
   headerImage: {
     width: '64.22%', //(822 / 1280) * 100
@@ -115,7 +113,7 @@ const styles = StyleSheet.create({
   movieInfoContainer: {
     position: 'absolute',
     width: '29.14%', // 373px / 1280px * 100
-    left: '9.92%', // 127px / 1280px * 100
+    left: 0, // Align to the left of the content section
     top: '13.19%', // 95px / 720px * 100
     zIndex: 1, // Ensures this content stays above the header image
   },
@@ -236,7 +234,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   movieThumbnail: {
-    width: '11.33%', // Width relative to the section container
+    width: '100%', // Width relative to the section container
     height: '100%', // Fill the section container height
     marginRight: 15,
     borderRadius: 6,
