@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '58.33%', // Same as before for the header section
     position: 'relative',
+    //minHeight: 300, // Ensure a minimum height to prevent shrinking
   },
   headerImage: {
     width: '64.22%', //(822 / 1280) * 100
@@ -114,7 +115,6 @@ const styles = StyleSheet.create({
   movieInfoContainer: {
     position: 'absolute',
     width: '29.14%', // 373px / 1280px * 100
-    height: '32.64%', // 235px / 720px * 100
     left: '9.92%', // 127px / 1280px * 100
     top: '13.19%', // 95px / 720px * 100
     zIndex: 1, // Ensures this content stays above the header image
@@ -217,7 +217,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   section: {
-    height: '28.75%',
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '28.75%', // Use percentage
+    minHeight: 250, // Ensure a minimum height to prevent too much shrinking
     justifyContent: 'center', // Center content vertically within the section
   },
   sectionTitle: {
