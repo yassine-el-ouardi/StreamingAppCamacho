@@ -1,77 +1,82 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function MainScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.backgroundContainer}>
-        {/* Header Image and Logo */}
-        <Image source={require('../assets/image.png')} style={styles.headerImage} />
-        <Text style={styles.logo}>LOGO</Text>
+    <View style={styles.container}>
+      {/* Sidebar Navigation */}
+      <View style={styles.sidebar}>
+        {renderSidebarIcon('home-outline', true)}
+        {renderSidebarIcon('football-outline')}
+        {renderSidebarIcon('videocam-outline')}
+        {renderSidebarIcon('tv-outline')}
+        {renderSidebarIcon('play-circle-outline')}
+        {renderSidebarIcon('settings-outline')}
+      </View>
 
-        {/* Movie Info */}
-        <View style={styles.movieInfoContainer}>
-          <Text style={styles.movieTitle}>Avengers</Text>
-          <Text style={styles.movieDetails}>2022 - Acción - Película</Text>
-          <View style={styles.ratingContainer}>
-            <Text style={styles.rating}>8.8/10</Text>
-            <View style={styles.pgContainer}>
-              <Text style={styles.pgText}>PG - 13</Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {/* Header Section with Movie Info Overlay */}
+        <View style={styles.headerSection}>
+          <Image source={require('../assets/header-image.png')} style={styles.headerImage} />
+          <View style={styles.movieInfoContainer}>
+            <Text style={styles.movieTitle}>Avengers</Text>
+            <Text style={styles.movieDetails}>2022 - Acción - Película</Text>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.rating}>8.8/10</Text>
+              <View style={styles.pgContainer}>
+                <Text style={styles.pgText}>PG - 13</Text>
+              </View>
+            </View>
+            <Text style={styles.movieDescription}>
+              Cuando un enemigo inesperado amenaza con poner en peligro la seguridad mundial, Nicholas
+              Fury, Director de S.H.I.E.L.D., necesita encontrar urgentemente un equipo que salve al
+              mundo del mayor de los desastres.
+            </Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.playButton}>
+                <Text style={styles.playButtonText}>Reproducir</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.infoButton}>
+                <Text style={styles.infoButtonText}>Más información</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          <Text style={styles.movieDescription}>
-            Cuando un enemigo inesperado amenaza con poner en peligro la seguridad mundial, Nicholas
-            Fury, Director de S.H.I.E.L.D., necesita encontrar urgentemente un equipo que salve al
-            mundo del mayor de los desastres.
-          </Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.playButton}>
-              <Text style={styles.playButtonText}>Reproducir</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>Más información</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Sidebar Icons */}
-        <View style={styles.sidebar}>
-          {renderSidebarIcon('home', true)}
-          {renderSidebarIcon('soccer')}
-          {renderSidebarIcon('videocam')}
-          {renderSidebarIcon('tv')}
-          {renderSidebarIcon('play-circle')}
-          {renderSidebarIcon('18')}
+          <Text style={styles.logo}>LOGO</Text>
         </View>
 
         {/* Sections */}
-        <Text style={styles.sectionTitle}>Lo nuevo</Text>
-        <ScrollView horizontal style={styles.sectionContainer}>
-          {renderMovies()}
-        </ScrollView>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Lo nuevo</Text>
+          <ScrollView horizontal style={styles.sectionContainer}>
+            {renderMovies()}
+          </ScrollView>
+        </View>
 
-        <Text style={styles.sectionTitle}>Lo más buscado</Text>
-        <ScrollView horizontal style={styles.sectionContainer}>
-          {renderMovies()}
-        </ScrollView>
-      </View>
-    </ScrollView>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Lo más buscado</Text>
+          <ScrollView horizontal style={styles.sectionContainer}>
+            {renderMovies()}
+          </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
 function renderSidebarIcon(iconName, isActive = false) {
   return (
-    <View style={styles.sidebarIconContainer} key={iconName}>
-      <Image source={require('../assets/image.png')} style={styles.sidebarIcon} />
+    <TouchableOpacity style={styles.sidebarIconContainer} key={iconName}>
+      <Icon name={iconName} size={30} color="#FFFFFF" />
       {isActive && <View style={styles.sidebarActiveIndicator} />}
-    </View>
+    </TouchableOpacity>
   );
 }
 
 function renderMovies() {
   const movies = Array(10).fill('../assets/image.png');
   return movies.map((_, index) => (
-    <Image key={index} source={require('../assets/image.png')} style={styles.movieThumbnail} />
+    <Image key={index} source={require('../assets/image.png')} style={styles.movieThumbnail} resizeMode="contain" />
   ));
 }
 
@@ -79,18 +84,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
+    flexDirection: 'row',
   },
-  backgroundContainer: {
+  sidebar: {
+    width: 60,
+    height: '100%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingVertical: 20,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 20,
+    flexDirection: 'column',
+  },
+  headerSection: {
+    width: '100%',
+    height: '58.33%', // Same as before for the header section
     position: 'relative',
-    width: 1280,
-    height: 1633,
   },
   headerImage: {
+    width: '64.22%', //(822 / 1280) * 100
+    height: '100%',
+    alignSelf: 'flex-end',
+  },
+  movieInfoContainer: {
     position: 'absolute',
-    width: 822,
-    height: 420,
-    left: 458,
-    top: 0,
+    width: '29.14%', // 373px / 1280px * 100
+    height: '32.64%', // 235px / 720px * 100
+    left: '9.92%', // 127px / 1280px * 100
+    top: '13.19%', // 95px / 720px * 100
+    zIndex: 1, // Ensures this content stays above the header image
   },
   logo: {
     position: 'absolute',
@@ -102,11 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#FFFFFF',
     textAlign: 'center',
-  },
-  movieInfoContainer: {
-    position: 'absolute',
-    left: 127,
-    top: 95,
+    zIndex: 1,
   },
   movieTitle: {
     fontFamily: 'Inter',
@@ -115,8 +138,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     lineHeight: 48,
     color: '#FFFFFF',
-    width: 328,
-    height: 63,
   },
   movieDetails: {
     fontFamily: 'Inter',
@@ -195,32 +216,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
   },
-  sidebar: {
-    position: 'absolute',
-    top: 132,
-    left: 33,
-    width: 40,
-    height: 563,
-    justifyContent: 'space-between',
-  },
-  sidebarIconContainer: {
-    position: 'relative',
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  sidebarIcon: {
-    width: 25,
-    height: 25,
-  },
-  sidebarActiveIndicator: {
-    position: 'absolute',
-    left: 8,
-    top: 33,
-    width: 25,
-    height: 4,
-    backgroundColor: 'rgba(0, 209, 255, 0.7)',
+  section: {
+    height: '28.75%',
+    justifyContent: 'center', // Center content vertically within the section
   },
   sectionTitle: {
     fontFamily: 'Inter',
@@ -229,16 +227,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     lineHeight: 30,
     color: '#FFFFFF',
-    marginTop: 50,
-    marginLeft: 113,
   },
   sectionContainer: {
     marginTop: 10,
-    paddingLeft: 113,
+    flexDirection: 'row',
   },
   movieThumbnail: {
-    width: 145,
-    height: 207,
+    width: '11.33%', // Width relative to the section container
+    height: '100%', // Fill the section container height
     marginRight: 15,
     borderRadius: 6,
   },
