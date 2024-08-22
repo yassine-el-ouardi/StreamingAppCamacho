@@ -79,9 +79,13 @@ function renderSidebarIcon(iconName: keyof typeof iconMap, isActive = false) {
 
   return (
 
-    <TouchableOpacity key={iconName}>
+    <TouchableOpacity key={iconName} style={[styles.sidebarIconContainer, 
+      iconName === 'settings' && styles.sidebarSettingsIconContainer,]
+    }>
       <Image source={iconMap[iconName]}
-      style={styles.sidebarIconContainer}
+      style={styles.sidebarIcon}
+      resizeMode="contain"
+      
       />
       {isActive && <View style={styles.sidebarActiveIndicator} />}
     </TouchableOpacity>

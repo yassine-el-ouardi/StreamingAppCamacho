@@ -17,10 +17,9 @@ export default StyleSheet.create({
     },
     sidebar: {
       width: sidebarWidth,
-      height: '100%',
-      justifyContent: 'space-evenly',
       alignItems: 'center',
-      paddingVertical: 20,
+      marginTop: height * (113/720),
+      justifyContent: 'space-evenly',
       backgroundColor: '#000000',
     },
     scrollContainer: {
@@ -32,6 +31,7 @@ export default StyleSheet.create({
       height: headerHeight,
       width: '100%',
       position: 'relative',
+      justifyContent: 'center',
     },
     headerImage: {
       width: '64.22%',
@@ -40,9 +40,7 @@ export default StyleSheet.create({
     },
     movieInfoContainer: {
       position: 'absolute',
-      //width: '29.14%',
       zIndex: 1,
-//      justifyContent: 'center',
       flex: 1,
       marginLeft: width * (14/1280),
     },
@@ -73,7 +71,6 @@ export default StyleSheet.create({
       fontSize: height * (14/720),
       lineHeight: height * (17/720),
       color: '#FFFFFF',
-      //marginTop: 8,
     },
     ratingContainer: {
       flexDirection: 'row',
@@ -109,7 +106,6 @@ export default StyleSheet.create({
       fontSize: height * (12/720),
       lineHeight: height * (15/720),
       color: '#FFFFFF',
-      //marginTop: 10,
       width: height * (364/720),
     },
     buttonContainer: {
@@ -119,34 +115,33 @@ export default StyleSheet.create({
     playButton: {
       backgroundColor: '#FFFFFF',
       borderRadius: 8,
-      paddingVertical: 5,
-      paddingHorizontal: 15,
+      paddingVertical: height * (6/720),
+      paddingHorizontal: width * (13/1280),
       marginRight: 10,
     },
     playButtonText: {
       fontFamily: 'Inter',
       fontStyle: 'normal',
       fontWeight: '700',
-      fontSize: 18,
+      fontSize: height * (18/720),
       color: '#000000',
     },
     infoButton: {
       backgroundColor: 'rgba(179, 179, 179, 0.44)',
-      borderRadius: 8,
-      paddingVertical: 5,
-      paddingHorizontal: 15,
+      borderRadius: 6,
+      paddingVertical: height * (6/720),
+      paddingHorizontal: width * (13/1280),
     },
     infoButtonText: {
       fontFamily: 'Inter',
       fontStyle: 'normal',
       fontWeight: '700',
-      fontSize: 18,
+      fontSize: height * (18/720),
       color: '#FFFFFF',
     },
     section: {
       height: sectionHeight,
       justifyContent: 'center',
-      //marginBottom: 20,
     },
     sectionTitle: {
       fontFamily: 'Inter',
@@ -155,11 +150,9 @@ export default StyleSheet.create({
       fontSize: height * (25/720),
       lineHeight: height * (50/720),//estimated 50
       color: '#FFFFFF',
-      //paddingHorizontal: 20,
     },
     sectionContainer: {
       flexDirection: 'row',
-      //paddingHorizontal: 20,
     },
     movieThumbnail: {
       width: movieThumbnailWidth,
@@ -168,18 +161,21 @@ export default StyleSheet.create({
     },
     sidebarIconContainer: {
       position: 'relative',
-      width: width * (40/1280),
-      height: width * (40/1280),
+      height: height * (25/720),
       alignItems: 'center',
       justifyContent: 'center',
     },
+    sidebarSettingsIconContainer: {
+      marginTop: height * (103/720), // Add a margin to separate the settings icon from the others
+    },
+    sidebarIcon: {
+      height: '100%', // Make the icon's height fill the container
+    },
     sidebarActiveIndicator: {
       position: 'absolute',
-      top: width * (44/1280),
-      width: width * (40/1280),
-      height: 4,
-      alignItems: 'center',
-      justifyContent: 'center',
+      top: height * (25/720),
+      width: width * (25/1280),
+      height: 3,
       backgroundColor: 'rgba(0, 209, 255, 0.7)',
     },
   });
