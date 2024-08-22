@@ -1,22 +1,34 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import styles from './styles/styles'
+
+const iconMap = {
+  home: require('../assets/icons/home.png'),
+  football: require('../assets/icons/football.png'),
+  cam: require('../assets/icons/cam.png'),
+  screen: require('../assets/icons/screen.png'),
+  play: require('../assets/icons/play.png'),
+  adult: require('../assets/icons/18.png'),
+  kid: require('../assets/icons/kid.png'),
+  settings: require('../assets/icons/settings.png'),
+};
 
 export default function MainScreen() {
+
   return (
     <View style={styles.container}>
-      {/* Sidebar Navigation */}
       <View style={styles.sidebar}>
-        {renderSidebarIcon('home-outline', true)}
-        {renderSidebarIcon('football-outline')}
-        {renderSidebarIcon('videocam-outline')}
-        {renderSidebarIcon('tv-outline')}
-        {renderSidebarIcon('play-circle-outline')}
-        {renderSidebarIcon('settings-outline')}
+        {renderSidebarIcon('home', true)}
+        {renderSidebarIcon('football')}
+        {renderSidebarIcon('cam')}
+        {renderSidebarIcon('screen')}
+        {renderSidebarIcon('play')}
+        {renderSidebarIcon('adult')}
+        {renderSidebarIcon('kid')}
+        {renderSidebarIcon('settings')}
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {/* Header Section with Movie Info Overlay */}
         <View style={styles.headerSection}>
           <Image source={require('../assets/header-image.png')} style={styles.headerImage} />
           <View style={styles.movieInfoContainer}>
@@ -45,7 +57,6 @@ export default function MainScreen() {
           <Text style={styles.logo}>LOGO</Text>
         </View>
 
-        {/* Sections */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Lo nuevo</Text>
           <ScrollView horizontal style={styles.sectionContainer}>
@@ -64,10 +75,14 @@ export default function MainScreen() {
   );
 }
 
-function renderSidebarIcon(iconName, isActive = false) {
+function renderSidebarIcon(iconName: keyof typeof iconMap, isActive = false) {
+
   return (
-    <TouchableOpacity style={styles.sidebarIconContainer} key={iconName}>
-      <Icon name={iconName} size={30} color="#FFFFFF" />
+
+    <TouchableOpacity key={iconName}>
+      <Image source={iconMap[iconName]}
+      style={styles.sidebarIconContainer}
+      />
       {isActive && <View style={styles.sidebarActiveIndicator} />}
     </TouchableOpacity>
   );
@@ -76,167 +91,11 @@ function renderSidebarIcon(iconName, isActive = false) {
 function renderMovies() {
   const movies = Array(10).fill('../assets/image.png');
   return movies.map((_, index) => (
-    <Image key={index} source={require('../assets/image.png')} style={styles.movieThumbnail} resizeMode="contain" />
+    <Image
+      key={index}
+      source={require('../assets/image.png')}
+      style={styles.movieThumbnail}
+      resizeMode="contain"
+    />
   ));
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-    flexDirection: 'row', // Ensures sidebar and content are side by side
-  },
-  sidebar: {
-    width: '8.98%',
-    height: '100%',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    paddingVertical: 20,
-    backgroundColor: '#000000', // Add a solid background color to the sidebar
-    // No need for position absolute since it's now part of the flexbox layout
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    paddingBottom: 20,
-    paddingLeft: 0, // Remove left padding since sidebar is no longer overlapping
-  },
-  headerSection: {
-    width: '100%',
-    height: '58.33%', // Same as before for the header section
-    position: 'relative',
-  },
-  headerImage: {
-    width: '64.22%', //(822 / 1280) * 100
-    height: '100%',
-    alignSelf: 'flex-end',
-  },
-  movieInfoContainer: {
-    position: 'absolute',
-    width: '29.14%', // 373px / 1280px * 100
-    left: 0, // Align to the left of the content section
-    top: '13.19%', // 95px / 720px * 100
-    zIndex: 1, // Ensures this content stays above the header image
-  },
-  logo: {
-    position: 'absolute',
-    top: 33,
-    right: 40,
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 40,
-    color: '#FFFFFF',
-    textAlign: 'center',
-    zIndex: 1,
-  },
-  movieTitle: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 40,
-    lineHeight: 48,
-    color: '#FFFFFF',
-  },
-  movieDetails: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 14,
-    lineHeight: 17,
-    color: '#FFFFFF',
-    marginTop: 8,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 5,
-  },
-  rating: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: 12,
-    color: '#FFFFFF',
-  },
-  pgContainer: {
-    borderColor: '#FFFFFF',
-    borderWidth: 1,
-    borderRadius: 6,
-    marginLeft: 10,
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-  },
-  pgText: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 10,
-    color: '#FFFFFF',
-  },
-  movieDescription: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: 12,
-    lineHeight: 15,
-    color: '#FFFFFF',
-    marginTop: 10,
-    width: 364,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 15,
-  },
-  playButton: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 8,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    marginRight: 10,
-  },
-  playButtonText: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 18,
-    color: '#000000',
-  },
-  infoButton: {
-    backgroundColor: 'rgba(179, 179, 179, 0.44)',
-    borderRadius: 8,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-  },
-  infoButtonText: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 18,
-    color: '#FFFFFF',
-  },
-  section: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: '28.75%', // Use percentage
-    minHeight: 250, // Ensure a minimum height to prevent too much shrinking
-    justifyContent: 'center', // Center content vertically within the section
-  },
-  sectionTitle: {
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 25,
-    lineHeight: 30,
-    color: '#FFFFFF',
-  },
-  sectionContainer: {
-    marginTop: 10,
-    flexDirection: 'row',
-  },
-  movieThumbnail: {
-    width: '100%', // Width relative to the section container
-    height: '100%', // Fill the section container height
-    marginRight: 15,
-    borderRadius: 6,
-  },
-});
