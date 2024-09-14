@@ -30,12 +30,16 @@ export default function MainScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.headerSection}>
+          {/* Horizontal Gradient Overlay */}
+          <Image source={require('../assets/Rectangle 18.png')} style={styles.gradientOverlayBottom} />
+          {/* Vertical Gradient Overlay */}
+          <Image source={require('../assets/Rectangle 19.png')} style={styles.gradientOverlayLeft} />
+
           <Image source={require('../assets/header-image.png')} style={styles.headerImage} />
           <View style={styles.movieInfoContainer}>
             <Text style={styles.movieTitle}>Avengers</Text>
-            <Text style={styles.movieDetails}>2022 - Acción - Película</Text>
-            <View style={styles.ratingContainer}>
-              <Text style={styles.rating}>8.8/10</Text>
+            <View style={styles.movieDetailsContainer}>
+              <Text style={styles.movieDetails}>2022 - Acción - Película</Text>
               <View style={styles.pgContainer}>
                 <Text style={styles.pgText}>PG - 13</Text>
               </View>
@@ -45,6 +49,10 @@ export default function MainScreen() {
               Fury, Director de S.H.I.E.L.D., necesita encontrar urgentemente un equipo que salve al
               mundo del mayor de los desastres.
             </Text>
+            <View style={styles.ratingContainer}>
+              <Image source={require('../assets/icons/imdb.png')} style={styles.imdbIcon} />
+              <Text style={styles.rating}>8.8/10</Text>
+            </View>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.playButton}>
                 <Text style={styles.playButtonText}>Reproducir</Text>
@@ -87,7 +95,7 @@ function renderSidebarIcon(iconName: keyof typeof iconMap, isActive = false) {
       resizeMode="contain"
       
       />
-      {isActive && <View style={styles.sidebarActiveIndicator} />}
+            {isActive && <View style={styles.sidebarActiveIndicator} />}
     </TouchableOpacity>
   );
 }

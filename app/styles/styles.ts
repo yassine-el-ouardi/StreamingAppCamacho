@@ -38,6 +38,22 @@ export default StyleSheet.create({
       height: '100%',
       alignSelf: 'flex-end',
     },
+    gradientOverlayBottom: {
+      position: 'absolute',
+      bottom: -10,
+      right: 0,
+      height: '35%', // Adjust as needed to match the header image size
+      width: '64.22%', // Stick to the right, matching the header image width
+      zIndex: 1,
+    },
+    gradientOverlayLeft: {
+      position: 'absolute',
+      top: 0,
+      left: `${100 - 64.22}%`, // Positioning it to the left by the calculated percentage
+      height: '100%', // Make it cover the full height of the container
+      width: '10%', // Maintain width as per your design
+      zIndex: 1,
+    },  
     movieInfoContainer: {
       position: 'absolute',
       zIndex: 1,
@@ -63,6 +79,12 @@ export default StyleSheet.create({
       fontSize: height * (40/720),
       lineHeight: height * (48/720),
       color: '#FFFFFF',
+      marginBottom: height * (7/720),
+    },
+    movieDetailsContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: height * (7/720),
     },
     movieDetails: {
       fontFamily: 'Inter',
@@ -77,6 +99,11 @@ export default StyleSheet.create({
       alignItems: 'center',
       marginTop: 5,
     },
+    imdbIcon: {
+      width: height * (24/720), // Adjust the size as needed
+      height: height * (12/720), // Adjust the size as needed
+      marginRight: 5,
+    },
     rating: {
       fontFamily: 'Inter',
       fontStyle: 'normal',
@@ -87,10 +114,10 @@ export default StyleSheet.create({
     pgContainer: {
       borderColor: '#FFFFFF',
       borderWidth: 1,
-      borderRadius: 6,
+      borderRadius: 3,
       marginLeft: 10,
       paddingHorizontal: 5,
-      paddingVertical: 2,
+      paddingVertical: 1,
     },
     pgText: {
       fontFamily: 'Inter',
@@ -107,6 +134,7 @@ export default StyleSheet.create({
       lineHeight: height * (15/720),
       color: '#FFFFFF',
       width: height * (364/720),
+      marginBottom: height * (2/720),
     },
     buttonContainer: {
       flexDirection: 'row',
